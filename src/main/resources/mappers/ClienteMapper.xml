@@ -4,7 +4,38 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="edu.eci.cvds.sampleprj.dao.mybatis.mappers.ClienteMapper">
-
-
+    <select parameterType="map" id="consultarClientes" resultMap="ClienteResult">
+        select
+        c.nombre,
+        c.documento,
+        c.telefono,
+        c.direccion,
+        c.email,
+        c.vetado,
+        ir.id ,
+        ir.fechainiciorenta ,
+        ir.fechafinrenta ,
+        i.id ,
+        i.nombre ,
+        i.descripcion ,
+        i.fechalanzamiento ,
+        i.tarifaxdia ,
+        i.formatorenta ,
+        i.genero ,
+        ti.id ,
+        ti.descripcion
+        FROM VI_CLIENTES as c
+        left join VI_ITEMRENTADO as ir on c.documento=ir.CLIENTES_documento
+        left join VI_ITEMS as i on ir.ITEMS_id=i.id
+        left join VI_TIPOITEM as ti on i.TIPOITEM_id=ti.id
+    </select>
+    <resultMap type='Cliente' id='ClientResult'>
+        <id property='documento' column='Documento'/>
+        <result property='nombre' column='Nombre'/>
+        <result property='telefono' column='Telefono'/>
+        <result property='direccion' column='Direccion'/>
+        <result property='email' column='Email'/>
+        <collection property='rentados' ofType='ItemRentados'></collection>
+    </resultMap>
           	
 </mapper>
