@@ -167,6 +167,7 @@ public class JDBCExample {
     public static void evidencia(Connection con, int codigo1, int codigo2) throws SQLException {
 
         PreparedStatement productosPedido;
+
         String select = "SELECT Pr.nombre " +
                 "FROM ORD_PRODUCTOS AS Pr " +
                 "WHERE Pr.codigo IN (?,?);";

@@ -12,18 +12,21 @@
         c.direccion,
         c.email,
         c.vetado,
-        ir.id ,
-        ir.fechainiciorenta ,
-        ir.fechafinrenta ,
-        i.id ,
-        i.nombre ,
-        i.descripcion ,
-        i.fechalanzamiento ,
-        i.tarifaxdia ,
-        i.formatorenta ,
-        i.genero ,
-        ti.id ,
+
+        ir.id,
+        ir.fechainiciorenta,
+        ir.fechafinrenta,
+
+        i.id,
+        i.nombre,
+        i.descripcion,
+        i.fechalanzamiento,
+        i.tarifaxdia,
+        i.formatorenta,
+        i.genero,
+        ti.id,
         ti.descripcion
+
         FROM VI_CLIENTES as c
         left join VI_ITEMRENTADO as ir on c.documento=ir.CLIENTES_documento
         left join VI_ITEMS as i on ir.ITEMS_id=i.id
@@ -35,7 +38,10 @@
         <result property='telefono' column='Telefono'/>
         <result property='direccion' column='Direccion'/>
         <result property='email' column='Email'/>
-        <collection property='rentados' ofType='ItemRentados'></collection>
+        <result property='vetado' column='Vetado'/>
+        <collection property='rentados'
+                    ofType='ItemRentados'>
+        </collection>
     </resultMap>
           	
 </mapper>
