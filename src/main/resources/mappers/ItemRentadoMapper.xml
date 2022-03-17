@@ -10,6 +10,6 @@
         <result property='fechafinrenta' column='FechaFinRenta'/>
         <association property='item'
                      javaType='Item'
-                     />
+                     resultMap='edu.eci.cvds.sampleprj.dao.mybatis.mappers.ItemMapper.ItemResult'/>
     </resultMap>
 </mapper>

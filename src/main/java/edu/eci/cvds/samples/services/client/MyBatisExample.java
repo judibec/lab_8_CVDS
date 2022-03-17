@@ -21,6 +21,8 @@ package edu.eci.cvds.samples.services.client;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
+
+import edu.eci.cvds.sampleprj.dao.mybatis.mappers.ClienteMapper;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -53,7 +55,7 @@ public class MyBatisExample {
     }
 
     /**
-     * Programa principal de ejempo de uso de MyBATIS
+     * Programa principal de ejemplo de uso de MyBATIS
      * @param args
      * @throws SQLException 
      */
@@ -66,7 +68,8 @@ public class MyBatisExample {
         //Crear el mapper y usarlo: 
         //ClienteMapper cm=sqlss.getMapper(ClienteMapper.class)
         //cm...
-        
+        ClienteMapper cm=sqlss.getMapper(ClienteMapper.class);
+        System.out.println(cm.consultarClientes());
         
         
         sqlss.commit();
