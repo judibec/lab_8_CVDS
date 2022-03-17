@@ -32,10 +32,10 @@
         left join VI_ITEMS as i on ir.ITEMS_id=i.id
         left join VI_TIPOITEM as ti on i.TIPOITEM_id=ti.id
     </select>
-    <resultMap type='Cliente' id='ClientResult'>
+    <resultMap type='Cliente' id='ClienteResult'>
         <id property='documento' column='c_documento'/>
         <result property='nombre' column='c_nombre'/>
-        <result property='telefono' column='C_telefono'/>
+        <result property='telefono' column='c_telefono'/>
         <result property='direccion' column='c_direccion'/>
         <result property='email' column='c_email'/>
         <result property='vetado' column='c_vetado'/>
