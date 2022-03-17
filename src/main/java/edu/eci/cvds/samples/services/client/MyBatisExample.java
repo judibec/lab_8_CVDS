@@ -20,9 +20,14 @@ package edu.eci.cvds.samples.services.client;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.text.DateFormat;
 
 import edu.eci.cvds.sampleprj.dao.mybatis.mappers.ClienteMapper;
+import edu.eci.cvds.sampleprj.dao.mybatis.mappers.ItemMapper;
+import edu.eci.cvds.samples.entities.Item;
+import edu.eci.cvds.samples.entities.TipoItem;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -70,8 +75,24 @@ public class MyBatisExample {
         //cm...
         ClienteMapper cm=sqlss.getMapper(ClienteMapper.class);
         System.out.println(cm.consultarClientes());
-        
-        
+        System.out.println("--");
+        int documentoPrueba = 1234567899;
+        System.out.println(cm.consultarCliente(documentoPrueba));
+        System.out.println("--");
+        //cm.agregarItemRentadoACliente(1121212121,1, Date.valueOf("2022-03-16"), Date.valueOf("2022-03-20"));
+        int documentoPrueba1 = 1121212121;
+        System.out.println(cm.consultarCliente(documentoPrueba1));
+        System.out.println("--");
+        ItemMapper im = sqlss.getMapper(ItemMapper.class);
+        //Date dateItem = DateFormat.parse("2022/01/20");
+        im.insertarItem(new Item(new TipoItem(3, "sadasf"), 123456, "fdshdgh", "hytjgm", Date.valueOf("2022-03-20"), 50000, "kiyuil", "kukyk"));
+
+        System.out.println(im.consultarItems());
+        System.out.println("--");
+        int ItemPrueba = 123456;
+        System.out.println(im.consultarItem(ItemPrueba));
+
+
         sqlss.commit();
         
         
