@@ -19,7 +19,7 @@ public class MyBATISClienteDAO implements ClienteDAO {
         try {
             return clienteMapper.consultarCliente(id);
         } catch (org.apache.ibatis.exceptions.PersistenceException e) {
-            throw new PersistenceException("Error al consultar el cliente " + id, e);
+            throw new PersistenceException("Error al consultar el cliente " + id);
         }
     }
 
@@ -28,7 +28,17 @@ public class MyBATISClienteDAO implements ClienteDAO {
         try {
             clienteMapper.agregarItemRentadoACliente(id,idit,fechainicio,fechafin);
         } catch (org.apache.ibatis.exceptions.PersistenceException e) {
-            throw new PersistenceException("Error al añadir el cliente" + id, e);
+            throw new PersistenceException("Error al añadir el cliente" + id);
+        }
+    }
+
+    @Override
+    public void saveCliente(Cliente cliente) throws PersistenceException {
+        try{
+            clienteMapper.agregarCliente(cliente);
+        }
+        catch(org.apache.ibatis.exceptions.PersistenceException e) {
+            throw new PersistenceException("Error al consultar la lista de clientes");
         }
     }
 
@@ -38,7 +48,9 @@ public class MyBATISClienteDAO implements ClienteDAO {
             return clienteMapper.consultarClientes();
         }
         catch(org.apache.ibatis.exceptions.PersistenceException e) {
-            throw new PersistenceException("Error al consultar la lista de clientes", e);
+            throw new PersistenceException("Error al consultar la lista de clientes");
         }
     }
+
+
 }

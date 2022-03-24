@@ -23,7 +23,7 @@ public class MyBATISItemDAO implements ItemDAO{
         itemMapper.insertarItem(it);
     }
     catch(org.apache.ibatis.exceptions.PersistenceException e){
-        throw new PersistenceException("Error al registrar el item "+it.toString(),e);
+        throw new PersistenceException("Error al registrar el item "+it.toString());
     }
   }
 
@@ -33,7 +33,7 @@ public class MyBATISItemDAO implements ItemDAO{
         return itemMapper.consultarItem(id);
     }
     catch(org.apache.ibatis.exceptions.PersistenceException e) {
-      throw new PersistenceException("Error al consultar el item " + id, e);
+      throw new PersistenceException("Error al consultar el item " + id);
     }
   }
 
@@ -43,7 +43,16 @@ public class MyBATISItemDAO implements ItemDAO{
       return itemMapper.consultarItems();
     }
     catch(org.apache.ibatis.exceptions.PersistenceException e) {
-      throw new PersistenceException("Error al consultar la lista de items", e);
+      throw new PersistenceException("Error al consultar la lista de items");
+    }
+  }
+
+  @Override
+  public void registrarItem(Item item) throws PersistenceException {
+    try{
+      itemMapper.insertarItem(item);
+    }catch (PersistenceException e){
+      throw new PersistenceException("Error al agregar items");
     }
   }
 

@@ -9,10 +9,13 @@ import edu.eci.cvds.sampleprj.dao.mybatis.MyBATISClienteDAO;
 import edu.eci.cvds.sampleprj.dao.mybatis.MyBATISItemDAO;
 import edu.eci.cvds.sampleprj.dao.mybatis.MyBATISItemRentadoDAO;
 import edu.eci.cvds.sampleprj.dao.mybatis.MyBATISTipoItemDAO;
+import edu.eci.cvds.samples.entities.Cliente;
+import edu.eci.cvds.samples.entities.ItemRentado;
 import edu.eci.cvds.samples.services.impl.ServiciosAlquilerImpl;
-import edu.eci.cvds.samples.services.impl.ServiciosAlquilerItemsStub;
+//import edu.eci.cvds.samples.services.impl.ServiciosAlquilerItemsStub;
 import org.mybatis.guice.XMLMyBatisModule;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 import static com.google.inject.Guice.createInjector;
@@ -65,7 +68,10 @@ public class ServiciosAlquilerFactory {
    }
 
    public static void main(String[] args) throws  ExcepcionServiciosAlquiler{
-       System.out.println(instance.getServiciosAlquiler().consultarClientes().toString());
+       ArrayList<ItemRentado> itemRentados = new ArrayList<ItemRentado>();
+       Cliente cliente = new Cliente("ClienteConsultado", 180, "telefono", "direccion", "email", false, itemRentados);
+       instance.getServiciosAlquilerTesting().registrarCliente(cliente);
+       System.out.println(instance.getServiciosAlquilerTesting().consultarCliente(1234567899).toString());
    }
 
 }

@@ -70,6 +70,10 @@
         left join VI_TIPOITEM as ti on i.TIPOITEM_id=ti.id
     </select>
 
+    <insert id="agregarCliente" parameterType="map" >
+        INSERT INTO VI_CLIENTES values (#{cliente.documento},#{cliente.nombre},#{cliente.telefono},#{cliente.direccion},#{cliente.email},#{cliente.vetado});
+    </insert>
+
     <resultMap type='Cliente' id='ClienteResult'>
         <id property='documento' column='c_documento'/>
         <result property='nombre' column='c_nombre'/>

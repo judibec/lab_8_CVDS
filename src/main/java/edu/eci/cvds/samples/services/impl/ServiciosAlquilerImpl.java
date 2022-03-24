@@ -16,6 +16,7 @@ import edu.eci.cvds.samples.services.ExcepcionServiciosAlquiler;
 import edu.eci.cvds.samples.services.ServiciosAlquiler;
 import org.apache.ibatis.exceptions.PersistenceException;
 
+import javax.transaction.Transactional;
 import java.sql.Date;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -137,20 +138,25 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
    public void registrarAlquilerCliente(Date date, long docu, Item item, int numdias) throws ExcepcionServiciosAlquiler {
        try{
            if(clienteDAO.load((int)docu)==null){
-               throw new ExcepcionServiciosAlquiler("El cliente es null Pa") ;
+               throw new ExcepcionServiciosAlquiler("El cliente no existe") ;
            }
            Calendar calendar = Calendar.getInstance();
            calendar.setTime(date);
            calendar.add(Calendar.DAY_OF_YEAR, numdias);
            clienteDAO.save((int)docu,item.getId(),date,new java.sql.Date(calendar.getTime().getTime()));
        }  catch (PersistenceException ex) {
-           throw new ExcepcionServiciosAlquiler("Error al agregar item rentado al cliente con id: " + docu);
+           throw new ExcepcionServiciosAlquiler("Error al agregar item rentado al cliente");
        }
    }
 
+   @Transactional
    @Override
    public void registrarCliente(Cliente c) throws ExcepcionServiciosAlquiler {
-       throw new UnsupportedOperationException("Not supported yet.");
+        try{
+            clienteDAO.saveCliente(c);
+        }catch (PersistenceException e) {
+            throw new UnsupportedOperationException("Ni modo.");
+        }
    }
 
    @Override
@@ -164,7 +170,11 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
    }
    @Override
    public void registrarItem(Item i) throws ExcepcionServiciosAlquiler {
-       throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            itemDAO.registrarItem(i);
+        }catch (PersistenceException e) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
    }
 
    @Override

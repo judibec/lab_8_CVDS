@@ -42,7 +42,7 @@
         INSERT INTO VI_ITEMS
         VALUES(#{item.id}, #{item.nombre}, #{item.descripcion},
         #{item.fechaLanzamiento}, #{item.tarifaxDia}, #{item.formatoRenta},
-        #{item.genero}, #{item.tipo.id})
+        #{item.genero}, #{item.tipo.id},#{item.id})
     </insert>
 
     <insert parameterType="map" id="agregarItemRentadoACliente">

@@ -13,4 +13,6 @@ public interface ItemDAO {
 
    public List<Item> items() throws PersistenceException;
 
+   public void registrarItem(Item item) throws PersistenceException;
+
 }

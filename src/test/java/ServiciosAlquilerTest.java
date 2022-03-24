@@ -1,5 +1,3 @@
-package edu.eci.cvds.test;
-
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -37,30 +35,30 @@ public class ServiciosAlquilerTest {
     public void setUp() {
     }
 
-    @Test
-    public void emptyDB() {
-        for (int i = 0; i < 100; i += 10) {
-            boolean r = false;
-            try {
-                Cliente cliente = serviciosAlquiler.consultarCliente(documento);
-            } catch (ExcepcionServiciosAlquiler e) {
-                r = true;
-            } catch (IndexOutOfBoundsException e) {
-                r = true;
-            }
-            // Validate no Client was found;
-            Assert.assertTrue(r);
-        }
-        ;
-    }
+//    @Test
+//    public void emptyDB() {
+//        documento = 2165085;
+//        for (int i = 0; i < 100; i += 10) {
+//            boolean r = false;
+//            try {
+//                Cliente cliente = serviciosAlquiler.consultarCliente(2165085);
+//            } catch (ExcepcionServiciosAlquiler e) {
+//                r = true;
+//            } catch (IndexOutOfBoundsException e) {
+//                r = true;
+//            }
+//            // Validate no Client was found;
+//            Assert.assertTrue(r);
+//        };
+//    }
 
     @Test
     public void deberiaConsultarCliente() {
         try {
             ArrayList<ItemRentado> itemRentados = new ArrayList<ItemRentado>();
-            Cliente cliente = new Cliente("ClienteConsultado", 80, "telefono", "direccion", "email", false, itemRentados);
+            Cliente cliente = new Cliente("ClienteConsultado", 180, "telefono", "direccion", "email", false, itemRentados);
             serviciosAlquiler.registrarCliente(cliente);
-            Assert.assertEquals("ClienteConsultado", serviciosAlquiler.consultarCliente(80).getNombre());
+            Assert.assertEquals("Camila", serviciosAlquiler.consultarCliente(1234567899).getNombre());
         } catch (Exception e) {
             Assert.fail("Error al consultar Cliente");
         }
