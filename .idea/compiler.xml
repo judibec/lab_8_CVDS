@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="MyBATIS-Guice-DAO-VideorentalServicesLayer" />
         <module name="lab_7_CVDS" />
+        <module name="lab_8_CVDS" />
       </profile>
     </annotationProcessing>
   </component>
