@@ -3,13 +3,17 @@ package edu.eci.cvds.view;
 import com.google.inject.Inject;
 import edu.eci.cvds.samples.entities.Cliente;
 import edu.eci.cvds.samples.entities.Item;
+import edu.eci.cvds.samples.entities.ItemRentado;
 import edu.eci.cvds.samples.services.ExcepcionServiciosAlquiler;
 import edu.eci.cvds.samples.services.ServiciosAlquiler;
+import org.apache.ibatis.exceptions.PersistenceException;
+import org.checkerframework.checker.units.qual.C;
 
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
+import javax.persistence.criteria.CriteriaBuilder;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -60,4 +64,35 @@ public class AlquilerItemsBean extends BasePageBean{
     public long consultarMulta(int idItem) throws ExcepcionServiciosAlquiler{
         return serviciosAlquiler.consultarMultaAlquiler(idItem, new Date(System.currentTimeMillis()));
     }
+
+    public void registrar(String nombre, long documento, String telefono, String direccion, String email) throws ExcepcionServiciosAlquiler{
+       try{
+           Cliente ncliente = new Cliente(nombre,documento,telefono,direccion,email);
+           serviciosAlquiler.registrarCliente(ncliente);
+           listaCli.add(ncliente);
+       }catch (Exception e){
+           FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error Cliente", "ya hay un cliente registrado igual"));
+       }
+    }
+
+    public void setCliente(Cliente cliente){
+        this.cliente=cliente;
+    }
+
+    public Cliente getCliente(){
+        return this.cliente;
+    }
+
+    public void setCostoAlquiler(int costoAlquiler){
+        this.costoAlquiler = costoAlquiler;
+    }
+
+    public long getCostoAlquiler(){
+        return costoAlquiler;
+    }
+
+    public List<ItemRentado> consultarItemsCliente(Cliente cliente) throws ExcepcionServiciosAlquiler{
+        return serviciosAlquiler.consultarItemsCliente(cliente.getDocumento());
+    }
+
 }
