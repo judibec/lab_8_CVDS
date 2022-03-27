@@ -18,6 +18,7 @@ import org.apache.ibatis.exceptions.PersistenceException;
 
 import javax.transaction.Transactional;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -59,7 +60,8 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
    @Override
    public List<ItemRentado> consultarItemsCliente(long idcliente) throws ExcepcionServiciosAlquiler {
        try{
-           return clienteDAO.load((int)idcliente).getRentados();
+//           return clienteDAO.load((int)idcliente).getRentados();
+           return itemRentadoDAO.loadC(idcliente);
        }catch (PersistenceException e) {
            throw new UnsupportedOperationException("Not supported yet.");
        }
@@ -94,6 +96,18 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
 
    @Override
    public long consultarMultaAlquiler(int iditem, Date fechaDevolucion) throws ExcepcionServiciosAlquiler {
+//       try {
+//           consultarItem(iditem);
+//           ItemRentado itemRentado = itemRentadoDAO.load(iditem);
+//           if (itemRentado == null) throw new ExcepcionServiciosAlquiler("no existe item");
+//           LocalDate fechaFinal = itemRentado.getFechafinrenta().toLocalDate();
+//           long dias = ChronoUnit.DAYS.between(fechaFinal, fechaDevolucion.toLocalDate());
+//           System.out.println("test" + dias);
+//           if (dias < 0) dias = 0;
+//           return dias * valorMultaRetrasoxDia(iditem);
+//       }catch (PersistenceException e) {
+//           throw new ExcepcionServiciosAlquiler("Error al consultar multa");
+//       }
        try {
            List<Cliente> clientes = consultarClientes();
            for (int i=0 ; i<clientes.size() ; i++) {
@@ -110,10 +124,10 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
                    }
                }
            }
+           return iditem;
        } catch (Exception e) {
            throw  new ExcepcionServiciosAlquiler("Error al consultar multa de item con id: "+iditem);
        }
-       return iditem;
    }
 
    @Override

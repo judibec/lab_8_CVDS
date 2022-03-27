@@ -68,10 +68,9 @@ public class ServiciosAlquilerFactory {
    }
 
    public static void main(String[] args) throws  ExcepcionServiciosAlquiler{
-       ArrayList<ItemRentado> itemRentados = new ArrayList<ItemRentado>();
-       Cliente cliente = new Cliente("ClienteConsultado", 180, "telefono", "direccion", "email", false, itemRentados);
-       instance.getServiciosAlquilerTesting().registrarCliente(cliente);
-       System.out.println(instance.getServiciosAlquilerTesting().consultarCliente(1234567899).toString());
+//       Cliente cliente = new Cliente("ClienteConsultado", 180, "telefono", "direccion", "email");
+//       instance.getServiciosAlquiler().registrarCliente(cliente);
+       System.out.println(instance.getServiciosAlquiler().consultarItemsCliente(-1874919426).toString());
    }
 
 }

@@ -14,9 +14,9 @@ public class MyBATISItemRentadoDAO implements ItemRentadoDAO {
     private ItemRentadoMapper itemRentadoMapper;
 
     @Override
-    public List<ItemRentado> load() throws PersistenceException {
+    public List<ItemRentado> loadC(long idcliente) throws PersistenceException {
         try{
-            return itemRentadoMapper.consultarItemsRentados();
+            return itemRentadoMapper.consultarItemsRentadosCliente(idcliente);
         }catch (PersistenceException e){
             throw new PersistenceException("Error al consultar item rentados");
         }

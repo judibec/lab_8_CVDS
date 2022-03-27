@@ -9,5 +9,7 @@ public interface ItemRentadoMapper {
 
     public List<ItemRentado> consultarItemsRentados();
 
+    public List<ItemRentado> consultarItemsRentadosCliente(@Param("idcli")long id);
+
     public ItemRentado consultarItemRentado(@Param("idcli")int id);
 }

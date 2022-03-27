@@ -16,6 +16,12 @@
         FROM VI_ITEMRENTADO as ir join VI_ITEMS as i on ir.ITEMS_id=i.id left join VI_TIPOITEM as ti on i.TIPOITEM_id=ti.id
     </select>
 
+    <select parameterType="map" id="consultarItemsRentadosCliente" resultMap="ItemRentadoResult">
+        select ir.id , ir.fechainiciorenta , ir.fechafinrenta , i.id as item_id, i.nombre as i_nombre, i.descripcion as i_descripcion, i.fechalanzamiento as i_fechalanzamiento, i.tarifaxdia as i_tarifaxdia, i.formatorenta as i_formatorenta, i.genero as i_genero, ti.id as ti_id, ti.descripcion as ti_descripcion
+        FROM VI_ITEMRENTADO as ir left join VI_ITEMS as i on ir.ITEMS_id=i.id left join VI_TIPOITEM as ti on i.TIPOITEM_id=ti.id
+        WHERE CLIENTES_documento= #{idcli}
+    </select>
+
     <resultMap type='ItemRentado' id='ItemRentadoResult' >
         <id property='id' column='ir_id'/>
         <result property='fechainiciorenta' column='FechaInicioRenta'/>
