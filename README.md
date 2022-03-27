@@ -181,3 +181,5 @@ En este laboratorio se utilizará un 'framework' de persistencia. La base de dat
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/68ec57510440409b8816fb62396356d1)](https://www.codacy.com/gh/judibec/lab_8_CVDS/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=judibec/lab_8_CVDS&amp;utm_campaign=Badge_Grade)
 
+[![CircleCI](https://circleci.com/gh/judibec/lab_8_CVDS/tree/master.svg?style=svg)](https://circleci.com/gh/judibec/lab_8_CVDS/tree/master)
+
