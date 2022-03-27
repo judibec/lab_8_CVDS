@@ -20,10 +20,9 @@ import org.junit.Test;
 import org.junit.Assert;
 
 public class ServiciosAlquilerTest {
-    private long documento;
 
-    @Inject
-    private SqlSession sqlSession;
+//    @Inject
+//    private SqlSession sqlSession;
 
     ServiciosAlquiler serviciosAlquiler;
 
@@ -33,6 +32,14 @@ public class ServiciosAlquilerTest {
 
     @Before
     public void setUp() {
+        ArrayList<ItemRentado> itemRentados = new ArrayList<ItemRentado>();
+        try {
+            serviciosAlquiler.registrarCliente(new Cliente("ClienteConsultado", 2165712, "ClienteConsultado", "ClienteConsultado", "ClienteConsultado"));
+
+
+        }catch (ExcepcionServiciosAlquiler e){
+
+        }
     }
 
 //    @Test
@@ -55,10 +62,7 @@ public class ServiciosAlquilerTest {
     @Test
     public void deberiaConsultarCliente() {
         try {
-            ArrayList<ItemRentado> itemRentados = new ArrayList<ItemRentado>();
-            Cliente cliente = new Cliente("ClienteConsultado", 180, "telefono", "direccion", "email", false, itemRentados);
-            serviciosAlquiler.registrarCliente(cliente);
-            Assert.assertEquals("Camila", serviciosAlquiler.consultarCliente(1234567899).getNombre());
+            Assert.assertEquals("ClienteConsultado", serviciosAlquiler.consultarCliente(2165712).getNombre());
         } catch (Exception e) {
             Assert.fail("Error al consultar Cliente");
         }
@@ -102,7 +106,7 @@ public class ServiciosAlquilerTest {
                     "prueba", "pruebatarifa", new SimpleDateFormat("yyyy/MM/dd").parse("2022/10/4"),
                     100,"prueba","prueba");
             serviciosAlquiler.registrarItem(item);
-            Assert.assertEquals(100, serviciosAlquiler.valorMultaRetrasoxDia(6));
+            Assert.assertEquals(5000, serviciosAlquiler.valorMultaRetrasoxDia(6));
         } catch (Exception e) {
             Assert.fail("Error al consultar tarifas");
         }

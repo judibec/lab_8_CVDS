@@ -13,6 +13,7 @@ import edu.eci.cvds.samples.entities.Cliente;
 import edu.eci.cvds.samples.entities.ItemRentado;
 import edu.eci.cvds.samples.services.impl.ServiciosAlquilerImpl;
 //import edu.eci.cvds.samples.services.impl.ServiciosAlquilerItemsStub;
+import edu.eci.cvds.samples.services.impl.ServiciosAlquilerItemsStub;
 import org.mybatis.guice.XMLMyBatisModule;
 
 import java.util.ArrayList;
@@ -36,7 +37,8 @@ public class ServiciosAlquilerFactory {
                bind(TipoItemDAO.class).to(MyBATISTipoItemDAO.class);
                bind(ClienteDAO.class).to(MyBATISClienteDAO.class);
                bind(ItemRentadoDAO.class).to(MyBATISItemRentadoDAO.class);
-               bind(ServiciosAlquiler.class).to(ServiciosAlquilerImpl.class);
+               bind(ServiciosAlquiler.class).to(ServiciosAlquilerItemsStub.class);
+//               bind(ServiciosAlquiler.class).to(ServiciosAlquilerImpl.class);
            }
        });
    }
