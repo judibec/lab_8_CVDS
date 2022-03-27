@@ -38,7 +38,7 @@
                 <p:outputLabel value="Costo: " />
                 <p:inputText  id="costo" type="String" value="#{AlquilerBean.costoAlquiler}"/>
             </h:panelGrid>
-            <p:commandButton value="Registrar" update="ItemsRentados" action="registrocliente?faces-redirect = true" actionListener="#{AlquilerBean.registrarAlquiler(idItem.value,nDays.value)}"/>
+            <p:commandButton value="Registrar" update="ItemsRentados" action="registrocliente?faces-redirect = true" actionListener="#{AlquilerBean.registrarAlquiler(idItem.value,numDias.value)}"/>
             <p:commandButton update="ItemsRentados" value="Calcular costos" actionListener="#{AlquilerBean.consultarCosto(idItem.value,nDays.value)}" style="margin-left: 5px; margin-top: 5px"/>
         </p:panel>
         <p:commandButton value="Volver" action="registrocliente?faces-redirect = true" style="display: block ; margin: auto; margin-top: 10px"/>

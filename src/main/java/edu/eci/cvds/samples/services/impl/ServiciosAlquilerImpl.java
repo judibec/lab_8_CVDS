@@ -148,20 +148,33 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
         }
    }
 
-   @Override
-   public void registrarAlquilerCliente(Date date, long docu, Item item, int numdias) throws ExcepcionServiciosAlquiler {
-       try{
-           if(clienteDAO.load((int)docu)==null){
-               throw new ExcepcionServiciosAlquiler("El cliente no existe") ;
-           }
-           Calendar calendar = Calendar.getInstance();
-           calendar.setTime(date);
-           calendar.add(Calendar.DAY_OF_YEAR, numdias);
-           clienteDAO.save((int)docu,item.getId(),date,new java.sql.Date(calendar.getTime().getTime()));
-       }  catch (PersistenceException ex) {
-           throw new ExcepcionServiciosAlquiler("Error al agregar item rentado al cliente");
-       }
-   }
+//   @Transactional
+//   @Override
+//   public void registrarAlquilerCliente(Date date, long docu, Item item, int numdias) throws ExcepcionServiciosAlquiler {
+//       try{
+//           if(clienteDAO.load((int)docu)==null){
+//               throw new ExcepcionServiciosAlquiler("El cliente no existe") ;
+//           }
+//           Calendar calendar = Calendar.getInstance();
+//           calendar.setTime(date);
+//           calendar.add(Calendar.DAY_OF_YEAR, numdias);
+//           clienteDAO.save((int)docu,item.getId(),date,new java.sql.Date(calendar.getTime().getTime()));
+//       }  catch (PersistenceException ex) {
+//           throw new ExcepcionServiciosAlquiler("Error al agregar item rentado al cliente");
+//       }
+//   }
+
+    @Transactional
+    @Override
+    public void registrarAlquilerCliente(Date date, long docu, Item item, int numdias) throws ExcepcionServiciosAlquiler {
+        try{
+            if (numdias <=0 ) throw new ExcepcionServiciosAlquiler("los dias son invalidos");
+            consultarCliente(docu); consultarItem(item.getId());
+            clienteDAO.save((int)docu, item.getId(), date, Date.valueOf(date.toLocalDate().plusDays(numdias)));
+        } catch (PersistenceException ex){
+            throw new ExcepcionServiciosAlquiler("Error al registrar alquiler al cliente.");
+        }
+    }
 
    @Transactional
    @Override
